@@ -110,7 +110,7 @@ def main():
         print(f'{time()}《{save_path}》所有图片获取完毕，准备开始下载......')
         for it in pic_url:
             download_pic(it, save_path)
-            print(f'{time()}《{save_path}》所有图片下载完成')
+        print(f'{time()}相册《{save_path}》所有图片下载完成')
     print(f'{time()}所有图片下载完成，程序退出')
 
 
