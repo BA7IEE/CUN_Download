@@ -13,7 +13,7 @@ def page_urls():
     获取所有页面的URL
     :return: list(所有页面的URL)
     """
-    url = 'http://www.cnu.cc/users/545834'
+    url = 'http://www.cnu.cc/users/106718'
     hd = {
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36"
     }
