@@ -101,12 +101,12 @@ def pic_get(url):
     :return: 本相册所有图片URL的列表，相册名称
     '''
     print(f'{log_time()}开始解析图片链接和相册名称')
-    time.sleep(sleep_time(0, 0, 1))
     resp = etree.HTML(html_download(url))
-    res = resp.xpath('//div[@id="imgs_json"]/text()')[0]
+    res = resp.xpath('//div[@id="imgs_json"]/text()')
     title = resp.xpath('//h2[@class="work-title"]/text()')[0].strip()
+    time.sleep(sleep_time(0, 0, 1))
     output = ''
-    for i in res:
+    for i in res[0]:
         output += str(i)
     result = re.findall(r'img":"(.*?)"', output)
     pic_url = []
@@ -118,7 +118,6 @@ def pic_get(url):
 
 def download_pic(pic_url, pic_save_path):
     # 取出URL最后一个/后的字符串并组合
-    time.sleep(sleep_time(0, 0, 1))
     path = pic_save_path + pic_url.split('/')[-1]
     try:
         if not os.path.exists(pic_save_path):
