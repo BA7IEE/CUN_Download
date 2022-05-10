@@ -38,13 +38,14 @@ def html_download(url):
     s = requests.Session()
     s.headers[
         'User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36'
-    res = s.get(url)
-    if res.status_code == 200:
-        res.encoding = 'utf-8'
-        res = res.text
-        print(f'{log_time()}HTML下载成功（{url}）')
-        return res
-    return None
+    try:
+        response = s.get(url)
+        if response.status_code == 200:
+            response.encoding = 'utf-8'
+            print(f'{log_time()}HTML下载成功（{url}）')
+            return response.text
+    except requests.ConnectionError:
+        return None
 
 
 def username_get(url):
@@ -127,7 +128,6 @@ def download_pic(pic_url, pic_save_path):
             r.raise_for_status()
             with open(path, 'wb') as f:
                 f.write(r.content)
-                f.close()
                 print(f"{log_time()}{pic_url.split('/')[-1]}下载成功")
         else:
             print(f"{log_time()}{pic_url.split('/')[-1]}已存在，跳过")
